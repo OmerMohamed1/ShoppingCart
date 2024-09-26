@@ -1,0 +1,108 @@
+﻿@page
+@model LoginModel
+
+<h1 class="visually-hidden">@ViewData["Title"]</h1>
+
+<section class="py-5">
+    <div class="container mt-0">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-lg border-0 rounded-lg">
+                    <div class="card-body p-5">
+                        <section>
+                            <form id="account" method="post">
+                                <h4 class="text-center mb-4">Welcome Back!</h4>
+                                <p class="text-center text-muted">Please enter your credentials to log in.</p>
+                                <hr />
+                                <div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                                    <label asp-for="Input.Email">Email Address</label>
+                                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Input.Password" type="password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Password" />
+                                    <label asp-for="Input.Password">Password</label>
+                                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                </div>
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" asp-for="Input.RememberMe" />
+                                    <label class="form-check-label" asp-for="Input.RememberMe">Remember Me</label>
+                                </div>
+                                <div>
+                                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary mb-3">Log In</button>
+                                </div>
+                                <div class="text-center">
+                                    <p class="mb-1">
+                                        <a id="forgot-password" class="text-decoration-none" asp-page="./ForgotPassword">Forgot your password?</a>
+                                    </p>
+                                </div>
+                            </form>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<style>
+   /* body {
+        background-color: #f1f1f1;
+    }*/
+
+    .card {
+        background-color: #ffffff;
+        border-radius: 1rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-body {
+        padding: 2.5rem;
+    }
+
+    h4 {
+        color: #333;
+        font-weight: 600;
+        font-size: 1.5rem;
+    }
+
+    .text-muted {
+        font-size: 0.875rem;
+        margin-bottom: 1rem;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+    .form-floating > .form-control {
+        padding: 1.25rem 0.75rem;
+        border-radius: 0.5rem;
+    }
+
+    .form-check-label {
+        margin-left: 1rem;
+    }
+
+    .text-danger {
+        font-size: 0.875rem;
+    }
+
+    .img-fluid {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>

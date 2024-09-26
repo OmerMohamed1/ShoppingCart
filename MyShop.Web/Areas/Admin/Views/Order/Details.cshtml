@@ -1,0 +1,222 @@
+﻿@model OrderMV
+
+@{
+    ViewBag.PageTitle = "Orders Management";
+    ViewBag.CardTitle = "View Order Details";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<form method="post">
+    <div class="container">
+        <div class="row">
+            <!-- Pickup Details Form -->
+            <div class="col-lg-8 form-container">
+                <h4>PickUp Details</h4>
+                <br />
+                <input hidden asp-for="OrderHeader.Id" />
+
+                <div class="form-group row my-1">
+                    <label class="col-sm-3 ">Name</label>
+                    <div class="col-sm-7">
+                        <input asp-for="OrderHeader.Name" type="text" class="form-control">
+                        <span asp-validation-for="OrderHeader.Name" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row my-1">
+                    <label for="phone" class="col-sm-3 col-form-label">Phone</label>
+                    <div class="col-sm-7">
+                        <input asp-for="OrderHeader.PhoneNumber" type="text" class="form-control">
+                        <span asp-validation-for="OrderHeader.PhoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row my-1">
+                    <label for="address" class="col-sm-3 col-form-label">Address</label>
+                    <div class="col-sm-7">
+                        <input asp-for="OrderHeader.Address" type="text" class="form-control">
+                        <span asp-validation-for="OrderHeader.Address" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row my-1">
+                    <label for="city" class="col-sm-3 col-form-label">City</label>
+                    <div class="col-sm-7">
+                        <input asp-for="OrderHeader.City" type="text" class="form-control">
+                        <span asp-validation-for="OrderHeader.City" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row my-1">
+                    <label for="email" class="col-sm-3 col-form-label">Email</label>
+                    <div class="col-sm-7">
+                        <input asp-for="OrderHeader.ApplicationUser.Email" readonly type="email" class="form-control">
+                        <span asp-validation-for="OrderHeader.ApplicationUser.Email" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row my-1">
+                    <label for="order-date" class="col-sm-3 col-form-label">Order Date</label>
+                    <div class="col-sm-7">
+                        <input type="date" asp-for="OrderHeader.OrderDate" class="form-control">
+                        <span asp-validation-for="OrderHeader.OrderDate" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row my-1">
+                    <label for="carrier" class="col-sm-3 col-form-label">Carrier</label>
+                    <div class="col-sm-7">
+                        <input type="text" asp-for="OrderHeader.Carrier" id="carrier" class="form-control">
+                        <span asp-validation-for="OrderHeader.Carrier" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row my-1">
+                    <label for="tracking-number" class="col-sm-3 col-form-label">Tracking Number</label>
+                    <div class="col-sm-7">
+                        <input type="text" asp-for="OrderHeader.TrackingNumber" id="tracking" class="form-control">
+                        <span asp-validation-for="OrderHeader.TrackingNumber" class="text-danger"></span>
+
+                    </div>
+                </div>
+
+                <div class="form-group row my-1">
+                    <label for="shipping-date" class="col-sm-3 col-form-label">Shipping Date</label>
+                    <div class="col-sm-7">
+                        <input type="date" asp-for="OrderHeader.ShippingDate" class="form-control">
+                        <span asp-validation-for="OrderHeader.ShippingDate" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row my-1">
+                    <label for="session-id" class="col-sm-3 col-form-label">Session ID</label>
+                    <div class="col-sm-7">
+                        <input type="text" asp-for="OrderHeader.SessionId" readonly class="form-control">
+                        <span asp-validation-for="OrderHeader.SessionId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row my-1">
+                    <label for="payment-intent-id" class="col-sm-3 col-form-label">Payment Intent ID</label>
+                    <div class="col-sm-7">
+                        <input type="text" asp-for="OrderHeader.paymentIntentId" readonly class="form-control">
+                        <span asp-validation-for="OrderHeader.paymentIntentId" class="text-danger"></span>
+
+                    </div>
+                </div>
+
+                <div class="form-group row my-1">
+                    <label for="payment-date" class="col-sm-3 col-form-label">Payment Date</label>
+                    <div class="col-sm-7">
+                        <input type="date" asp-for="OrderHeader.PaymentDate" class="form-control">
+                        <span asp-validation-for="OrderHeader.PaymentDate" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row ">
+                    <label for="payment-status" class="col-sm-3 col-form-label">Payment Status</label>
+                    <div class="col-sm-7">
+                        <input type="text" asp-for="OrderHeader.PaymentStatus" class="form-control">
+                        <span asp-validation-for="OrderHeader.PaymentStatus" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row my-1 ">
+                    <div class="col-10 text-right">
+                        <button type="submit" asp-action="UpdateOrderDetails" class="btn btn-primary col-12">Update Pickup Details</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Order Summary -->
+            <div class="col-lg-4">
+                <h4>Order Summary</h4>
+                <label class="btn btn-outline-primary form-control my-2">Order Status - @Model.OrderHeader.OrderStatus</label>
+                <ul class="list-group mb-3">
+                    @foreach (var item in Model.OrderDetails)
+                    {
+                        <li class="list-group-item d-flex justify-content-between p-2">
+                            <div class="row container">
+                                <div class="col-8">
+                                    <h6 class="my-0 text-primary">@item.Product.Name</h6>
+                                    <small class="text-muted">Price : @item.Product.Price</small><br />
+                                    <small class="text-muted">Quantity : @item.Count</small>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <p class="text-success">@((item.Price * item.Count).ToString("c"))</p>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                    <li class="list-group-item bg-dark">
+                        <div class="row container">
+                            <div class="col-6">
+                                <h5 class="text-start">TOTAL</h5>
+                            </div>
+                            <div class="col-6 text-end">
+                                <h5 class="text-white">@Model.OrderHeader.TotalPrice.ToString("c")</h5>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                @if (Model.OrderHeader.OrderStatus == SD.Approve)
+                {
+                    <input type="submit" asp-action="StartProccess" class="btn btn-primary" value="Strat Proccess" />
+                }
+                @if (Model.OrderHeader.OrderStatus == SD.Proccessing)
+                {
+                    <input type="submit" asp-action="StartShip" onclick="return CheckData()" class="btn btn-success" value="Strat Sgipping" />
+                }
+                @if (Model.OrderHeader.OrderStatus != SD.Cancelled || Model.OrderHeader.OrderStatus != SD.Refund)
+                {
+                    <input type="submit" class="btn btn-danger"asp-action="CancelOrder" value="Canecl Order" />
+                }
+            </div>
+        </div>
+    </div>
+
+
+</form>
+
+
+
+
+
+
+
+
+
+@section Scripts{
+
+    <script>
+
+    function CheckData() {
+        if(document.getElementById("carrier").value == '') {
+            Swal.fire({
+                title: "There is an error",
+                text: "Please Enter Carrier",
+                icon: "error",
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+            });
+            return false;
+        }
+
+        if(document.getElementById("tracking").value == '') {
+            Swal.fire({
+                title: "There is an error",
+                text: "Please Enter Tracking Number",
+                icon: "error",
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+            });
+            return false;
+        }
+
+        return true;
+    }
+
+    </script>
+}

@@ -1,0 +1,128 @@
+﻿@model ShoppingCart
+
+
+<form method="post" asp-action="Details">
+    <!-- Product Section -->
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="product-card">
+                <!-- العنوان الرئيسي للصفحة -->
+                <h2 class="section-title">تفاصيل المنتج</h2>
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <input type="hidden" asp-for="ProductId" />
+
+                    <!-- صورة المنتج -->
+                    <div class="col-md-6">
+                        <img class="product-image mb-5 mb-md-0" src="~/@Model.Product.ImgUrl" alt="@Model.Product.Name" />
+                    </div>
+
+                    <!-- تفاصيل المنتج -->
+                    <div class="col-md-6 product-details">
+                        <div class="small mb-1 text-muted">@Model.Product.Category.Name</div>
+                        <h1 class="product-title">@Model.Product.Name</h1>
+                        <div class="fs-5 mb-5">
+                            <span class="product-old-price">$45.00</span>
+                            <span class="product-price">$@Model.Product.Price</span>
+                        </div>
+                        <p class="lead">@Model.Product.Description</p>
+
+                        <!-- إضافة الكمية وزر الإضافة إلى السلة -->
+                        <div class="d-flex">
+                            <input class="form-control text-center me-3" id="inputQuantity" asp-for="Count" />
+                            <button class="btn btn-outline-dark flex-shrink-0" type="submit">
+                                <i class="fas fa-cart-plus me-1"></i>
+                                أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+
+
+<style>
+    /* تحسين مظهر البطاقة */
+    .product-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* تحسين مظهر الصورة */
+    .product-image {
+        width: 100%;
+        height: auto;
+        max-height: 300px;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+    }
+
+    /* تنسيق التفاصيل */
+    .product-details {
+        padding: 20px;
+    }
+
+    /* تحسين مظهر العنوان */
+    .product-title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    /* تحسين مظهر السعر */
+    .product-price {
+        font-size: 1.5rem;
+        color: #28a745;
+        font-weight: bold;
+    }
+
+    .product-old-price {
+        font-size: 1.2rem;
+        text-decoration: line-through;
+        color: #6c757d;
+        margin-right: 10px;
+    }
+
+    /* تحسين مظهر الزر */
+    .btn-outline-dark {
+        border-color: #28a745;
+        color: #28a745;
+    }
+
+        .btn-outline-dark:hover {
+            background-color: #28a745;
+            color: white;
+        }
+
+    /* تحسين الحقل الرقمي */
+    .form-control {
+        max-width: 4rem;
+        text-align: center;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+    }
+
+    /* إضافة عنوان وتنسيق الحدود */
+    .section-title {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+        text-align: center;
+        position: relative;
+    }
+
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 3px;
+            background-color: #28a745;
+            display: block;
+            margin: 10px auto;
+        }
+</style>

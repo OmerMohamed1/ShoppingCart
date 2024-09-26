@@ -1,0 +1,73 @@
+﻿@model ProductVM
+
+@{
+    ViewBag.PageTitle = "Product Management";
+    ViewBag.CardTitle = "Create Product";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="Product.Name"></label>
+                <input asp-for="Product.Name" class="form-control" />
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Product.Description"></label>
+                <textarea id="textarea" asp-for="Product.Description" class="form-control"></textarea>
+                <span asp-validation-for="Product.Description" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Product.Price"></label>
+                <input asp-for="Product.Price" class="form-control" />
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Product.ImgUrl"></label>
+                <input type="file" name="file" id="imgfile" class="form-control" onchange="fillimg(event);"/>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Product.CategoryId"></label>
+                <select asp-for="Product.CategoryId" asp-items="Model.CategoryList" class="form-control">
+                    <option disabled selected>-- Select Categroy --</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Create</button>
+                <a asp-action="Index" asp-controller="Product" class="btn btn-info">Back To Index</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-6 ">
+        <div class="container ">
+            <img id="ImagePrevew"  width="300" height="300" style="border: 0px" />
+        </div>
+    </div>
+
+</div>
+
+@section Scripts{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+  tinymce.init({
+      selector: '#mytextarea',
+  });
+    </script>
+
+<script>
+    var fillimg = function (event) {
+        var imgholder = document.getElementById("ImagePrevew");
+        imgholder.src = URL.createObjectURL(event.target.files[0]);
+    }
+</script>
+
+}

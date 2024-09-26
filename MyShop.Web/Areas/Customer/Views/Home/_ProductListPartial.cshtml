@@ -1,0 +1,61 @@
+﻿@model IPagedList<Product>
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+
+<div id="product-list">
+    @if (ViewData["NoResultsMessage"] != null)
+    {
+        <div class="d-flex justify-content-center align-items-center" style="height: 60vh;">
+            <div class="text-center text-bold">
+                <p class="alert alert-warning">@ViewData["NoResultsMessage"]</p>
+            </div>
+        </div>
+    }
+    else
+    {
+        <section class="py-5">
+            <div class="container ">
+                <div class="row justify-content-center row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col">
+                            <div class="card h-100 shadow-sm border-0">
+                                <a href="/Customer/Home/Details/@item.Id">
+                                    <img class="card-img-top" src="~/@item.ImgUrl" alt="@item.Name" style="height: 250px; object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+
+                                </a>
+                                <div class="card-body text-center">
+                                    <h5 class="fw-bolder">@item.Name</h5>
+                                    <p class="text-muted">$@item.Price</p>
+                                </div>
+                                <div class="card-footer text-center bg-transparent border-0">
+                                    <a class="btn btn-outline-dark w-100" href="/Customer/Home/Details/@item.Id">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="container px-4 px-lg-5 mt-5">
+                <nav aria-label="Page navigation example">
+                    @Html.PagedListPager(
+                        (IPagedList)Model,
+                        page => Url.Action("Search", new { searchString = ViewData["CurrentFilter"], page = page }),
+                        new PagedListRenderOptions
+                        {
+                            UlElementClasses = new[] { "pagination justify-content-center" },
+                            LiElementClasses = new[] { "page-item" },
+                            PageClasses = new[] { "page-link" },
+                            DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                            DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                            LinkToPreviousPageFormat = "<span aria-hidden=\"true\">&laquo;</span>",
+                            LinkToNextPageFormat = "<span aria-hidden=\"true\">&raquo;</span>",
+                            FunctionToDisplayEachPageNumber = (pageNumber => pageNumber.ToString()),
+                            EllipsesFormat = "..."
+                        }
+                    )
+                </nav>
+            </div>
+        </section>
+    }
+</div>

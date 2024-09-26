@@ -1,0 +1,154 @@
+﻿@model ShoppingCartVM
+
+<link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+<form method="post">
+    <br />
+    <div class="container py-5">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6 pt-2">
+                        <i class="fas fa-shopping-cart"></i> &nbsp; Shopping Cart
+                    </div>
+                    <div class="col-6 text-end">
+                        <a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-shopping-bag"></i> Continue Shopping
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                @if (Model.CartsList.Count() < 1)
+                {
+                    <h3 class="text-center">There is no Items in Your Cart</h3>
+                }
+                else
+                {
+                    @foreach (var item in Model.CartsList)
+                    {
+                        <div class="row mb-3">
+                            <div class="d-none d-lg-block col-lg-1 text-center py-2">
+                                <img src="~/@item.Product.ImgUrl" class="rounded" width="100%" />
+                            </div>
+                            <div class="col-12 col-lg-6 pt-md-3">
+                                <h5><strong>@item.Product.Name</strong></h5>
+                                <p><small>@Html.Raw(item.Product.Description)</small></p>
+                            </div>
+                            <div class="col-12 col-lg-5 text-center row align-items-center">
+                                <div class="col-4 text-md-right pt-4">
+                                    <h6>
+                                        <strong>
+                                            @item.Product.Price.ToString("C")
+                                        </strong>
+                                        <span class="text-muted">&nbsp;x&nbsp;</span> @item.Count
+                                    </h6>
+                                </div>
+                                <div class="col-4 col-sm-4 col-lg-2 col-lg-6 pt-2">
+                                    <div class="w-75 btn-group" role="group">
+                                        <a class="btn btn-dark" asp-action="Plus" asp-route-cartid="@item.Id">
+                                            <i class="fas fa-plus-square"></i>
+                                        </a>
+                                        &nbsp;&nbsp;
+                                        <a class="btn btn-dark" asp-action="Minus" asp-route-cartid="@item.Id">
+                                            <i class="fas fa-minus-square"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-4 col-sm-4 col-lg-2 pt-2 text-right">
+                                    <a asp-action="Remove" asp-route-cartid="@item.Id" class="btn btn-danger">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                    }
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-4 offset-lg-8 mb-4">
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between bg-light">
+                                    <span class="text-dark">Total (USD)</span>
+                                    <strong class="text-dark">@Model.CartsList.Sum(item => item.Product.Price * item.Count).ToString("C")</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    @if (Model.CartsList.Count() >= 1)
+                    {
+                        <div class="row">
+                            <div class="card-footer">
+                                <div class="col-12 col-md-6 col-lg-4 offset-lg-8 pt-1">
+                                    <a asp-action="Summary" class="btn btn-primary form-control">
+                                        <i class="fas fa-file-invoice"></i> Summary
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<style>
+    /* تحسين الوان عربة التسوق */
+    .card-header {
+        background-color: #17a2b8; /* لون مميز للرأس */
+        color: white; /* النص الأبيض */
+    }
+
+    /* لون مميز للأزرار */
+    .btn-dark {
+        background-color: #007bff; /* لون أزرق مميز */
+        border-color: #007bff;
+        color: white;
+    }
+
+        .btn-dark:hover {
+            background-color: #0056b3; /* لون أزرق أغمق عند التمرير */
+            border-color: #004085;
+            color: white;
+        }
+
+    .btn-danger {
+        background-color: #dc3545; /* لون مميز للحذف */
+        border-color: #dc3545;
+        color: white;
+    }
+
+        .btn-danger:hover {
+            background-color: #c82333; /* لون أغمق عند التمرير */
+            border-color: #bd2130;
+            color: white;
+        }
+
+    /* تأثير hover للعناصر */
+    .btn-outline-light:hover {
+        background-color: white;
+        color: #17a2b8; /* لون مميز عند التمرير */
+    }
+
+    .card-footer {
+        background-color: #f8f9fa;
+    }
+
+    /* تحسين النص */
+    .text-center {
+        font-size: 1.25rem; /* تكبير حجم النص */
+        font-weight: bold; /* نص عريض */
+    }
+
+    /* تظليل المنتجات */
+    .card-body .row {
+        border-bottom: 1px solid #e9ecef; /* إضافة حد خفيف */
+        padding-bottom: 10px;
+    }
+
+    /* تحسين الأزرار الصغيرة */
+    .btn-sm {
+        padding: 0.5rem 1rem;
+    }
+
+</style>

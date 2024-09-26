@@ -1,0 +1,90 @@
+﻿html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+/* تغيير لون الأزرار عند تمرير الماوس */
+.navbar .nav-link:hover,
+.navbar .btn-outline-dark:hover {
+    background-color: white; /* اللون المطلوب للتأثير 
+            color: blue; /* لون النص المطلوب */
+    border-color: #17a2b8; /* تغيير لون الإطار */
+}
+
+/* Navbar styling */
+.navbar {
+    background: linear-gradient(90deg, #007bff, #00c4ff);
+}
+
+    .navbar .navbar-brand, .navbar-nav .nav-link {
+        color: white;
+    }
+
+        .navbar .navbar-brand:hover, .navbar-nav .nav-link:hover {
+            color: #ffdd57;
+        }
+/* Footer styling */
+/* تحسين مظهر الفوتر */
+footer {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 2rem 0;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+}
+
+/* لجعل الفوتر ثابتًا في الصفحات ذات المحتوى القليل */
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+#searchResults {
+    flex: 1;
+}
+
+footer {
+    background-color: #3770cd;
+    color: #ffffff;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Make the footer sticky at the bottom */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#searchResults {
+    flex: 1;
+}
