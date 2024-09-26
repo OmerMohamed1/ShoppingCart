@@ -31,6 +31,6 @@
 **ShoppingCart_Dashboorad**
 ![Dashboorad](MyShop.Web/Screenshots/Dashborab.png)
 **ShoppingCart_DetailsPorduct**
-![DetailsPorduct](MyShop.Web/Screenshots/Screenshot 2024-09-25 194255.png)
+![DetailsPorduct](MyShop.Web/Screenshots/Details.png)
 **ShoppingCart_Cart**
-![Cart](MyShop.Web/Screenshots/Screenshot 2024-09-25 195301.png)
+![Cart](MyShop.Web/Screenshots/Cart.png)
