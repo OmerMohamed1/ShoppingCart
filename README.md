@@ -23,4 +23,14 @@
 - **Stripe Payment API**
 - **JQuery, Datatables, Toaster JS**
 
+  
+## Images
+
+**ShoppingCart_Home**
 ![home](MyShop.Web/Screenshots/home.png)
+**ShoppingCart_Dashboorad**
+![Dashboorad](MyShop.Web/Screenshots/Dashborab.png)
+**ShoppingCart_DetailsPorduct**
+![DetailsPorduct](MyShop.Web/Screenshots/Screenshot2024-09-25194255.png)
+**ShoppingCart_Cart**
+![Cart](MyShop.Web/Screenshots/Screenshot2024-09-25195301.png)
